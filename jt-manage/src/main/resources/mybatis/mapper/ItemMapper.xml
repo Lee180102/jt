@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间写法   包名.接口名称  -->
+<mapper namespace="com.jt.manage.mapper.ItemMapper">
+
+
+    <select id="findCount" resultType="int">
+        select count(*) from tb_item
+    </select>
+
+    <select id="findItemByPage" resultType="Item" >
+        select * from tb_item order by created desc limit ${start},${rows}
+    </select>
+
+
+    <select id="findItemCatNameById" resultType="String">
+        select name from tb_item_cat where id = #{itemId}
+    </select>
+
+
+    <update id="updateStatus">
+        update tb_item set status = #{status} ,updated = now()
+        where id in(
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </update>
+
+</mapper>
