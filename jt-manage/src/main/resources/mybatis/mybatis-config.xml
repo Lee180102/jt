@@ -10,4 +10,11 @@
          -->
         <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
+
+    <plugins>
+        <plugin interceptor="com.github.abel533.mapperhelper.MapperInterceptor">
+            <property name="IDENTITY" value="MYSQL"/>
+            <property name="mappers" value="com.jt.common.mapper.SysMapper"/>
+        </plugin>
+    </plugins>
 </configuration>
