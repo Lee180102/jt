@@ -51,15 +51,15 @@
 <!--        </constructor-arg>-->
 <!--    </bean>-->
     <!--     定义哨兵连接池对象     -->
-    <bean class="redis.clients.jedis.JedisSentinelPool" id="jedisSentinelPool">
-        <constructor-arg name="masterName" value="${redis.sentinel.master}"/>
-        <constructor-arg name="sentinels">
-            <set>
-                <value>${redis.sentinel}</value>
-            </set>
-        </constructor-arg>
-        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
-    </bean>
+<!--    <bean class="redis.clients.jedis.JedisSentinelPool" id="jedisSentinelPool">-->
+<!--        <constructor-arg name="masterName" value="${redis.sentinel.master}"/>-->
+<!--        <constructor-arg name="sentinels">-->
+<!--            <set>-->
+<!--                <value>${redis.sentinel}</value>-->
+<!--            </set>-->
+<!--        </constructor-arg>-->
+<!--        <constructor-arg name="poolConfig" ref="poolConfig"/>-->
+<!--    </bean>-->
 
     <bean class="redis.clients.jedis.JedisPoolConfig" id="poolConfig">
         <property name="maxTotal" value="${redis.maxTotal}"/>
@@ -69,7 +69,7 @@
         <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
     </bean>
 
-    <bean class="com.jt.manage.factory.JedisClusterFactory" id="jedisCluster">
+    <bean class="com.jt.common.factory.JedisClusterFactory" id="jedisCluster">
         <property name="poolConfig" ref="poolConfig"/>
         <property name="propertySource">
             <value>classpath:/property/redis.properties</value>

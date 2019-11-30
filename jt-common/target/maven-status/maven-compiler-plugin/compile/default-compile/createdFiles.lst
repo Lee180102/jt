@@ -15,6 +15,7 @@ com/jt/common/vo/EasyUIResult.class
 com/jt/common/vo/ItemCatResult.class
 com/jt/common/po/BasePojo.class
 com/jt/common/vo/PicUploadResult.class
+com/jt/common/factory/JedisClusterFactory.class
 com/jt/common/vo/Where.class
 com/jt/common/service/RedisService$5.class
 com/jt/common/service/RedisService$4.class

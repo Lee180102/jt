@@ -4,6 +4,7 @@
 /Users/lee/Work/GitWorkspace/jt/jt-common/src/main/java/com/jt/common/service/RedisService.java
 /Users/lee/Work/GitWorkspace/jt/jt-common/src/main/java/com/jt/common/vo/EasyUIResult.java
 /Users/lee/Work/GitWorkspace/jt/jt-common/src/main/java/com/jt/common/service/HttpClientService.java
+/Users/lee/Work/GitWorkspace/jt/jt-common/src/main/java/com/jt/common/factory/JedisClusterFactory.java
 /Users/lee/Work/GitWorkspace/jt/jt-common/src/main/java/com/jt/common/service/Function.java
 /Users/lee/Work/GitWorkspace/jt/jt-common/src/main/java/com/jt/common/util/IdleConnectionEvictor.java
 /Users/lee/Work/GitWorkspace/jt/jt-common/src/main/java/com/jt/common/vo/SysResult.java
