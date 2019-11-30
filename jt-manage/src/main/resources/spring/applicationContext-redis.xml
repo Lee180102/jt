@@ -12,45 +12,73 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
     <!--	Spring整合redis    -->
-    <bean class="redis.clients.jedis.Jedis" id="jedis">
-        <constructor-arg name="host" value="${redis.host}"/>
-        <constructor-arg name="port" value="${redis.port1}"/>
-    </bean>
+<!--    <bean class="redis.clients.jedis.Jedis" id="jedis">-->
+<!--        <constructor-arg name="host" value="${redis.host}"/>-->
+<!--        <constructor-arg name="port" value="${redis.port1}"/>-->
+<!--    </bean>-->
 
 
     <!--	定义JedisPoolConfigBean    -->
-    <bean class="redis.clients.jedis.JedisPoolConfig" id="jedisPoolConfig">
+<!--    <bean class="redis.clients.jedis.JedisPoolConfig" id="jedisPoolConfig">-->
+<!--        <property name="maxTotal" value="${redis.maxTotal}"/>-->
+<!--        <property name="maxIdle" value="${redis.maxIdle}"/>-->
+<!--        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>-->
+<!--    </bean>-->
+    <!--	定义分片节点信息    -->
+<!--    <bean class="redis.clients.jedis.JedisShardInfo" id="shardInfo1">-->
+<!--        <constructor-arg name="host" value="${redis.host}"/>-->
+<!--        <constructor-arg name="port" value="${redis.port1}"/>-->
+<!--    </bean>-->
+
+<!--    <bean class="redis.clients.jedis.JedisShardInfo" id="shardInfo2">-->
+<!--        <constructor-arg name="host" value="${redis.host}"/>-->
+<!--        <constructor-arg name="port" value="${redis.port2}"/>-->
+<!--    </bean>-->
+
+<!--    <bean class="redis.clients.jedis.JedisShardInfo" id="shardInfo3">-->
+<!--        <constructor-arg name="host" value="${redis.host}"/>-->
+<!--        <constructor-arg name="port" value="${redis.port3}"/>-->
+<!--    </bean>-->
+    <!--	定义分片对象    -->
+<!--    <bean class="redis.clients.jedis.ShardedJedisPool" id="shardedJedisPool">-->
+<!--        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>-->
+<!--        <constructor-arg name="shards">-->
+<!--            <list>-->
+<!--                <ref bean="shardInfo1"/>-->
+<!--                <ref bean="shardInfo2"/>-->
+<!--                <ref bean="shardInfo3"/>-->
+<!--            </list>-->
+<!--        </constructor-arg>-->
+<!--    </bean>-->
+    <!--     定义哨兵连接池对象     -->
+    <bean class="redis.clients.jedis.JedisSentinelPool" id="jedisSentinelPool">
+        <constructor-arg name="masterName" value="${redis.sentinel.master}"/>
+        <constructor-arg name="sentinels">
+            <set>
+                <value>${redis.sentinel}</value>
+            </set>
+        </constructor-arg>
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
+    </bean>
+
+    <bean class="redis.clients.jedis.JedisPoolConfig" id="poolConfig">
         <property name="maxTotal" value="${redis.maxTotal}"/>
+        <property name="minIdle" value="${redis.minIdle}"/>
         <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
         <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
     </bean>
-    <!--	定义分片节点信息    -->
-    <bean class="redis.clients.jedis.JedisShardInfo" id="shardInfo1">
-        <constructor-arg name="host" value="${redis.host}"/>
-        <constructor-arg name="port" value="${redis.port1}"/>
+
+    <bean class="com.jt.manage.factory.JedisClusterFactory" id="jedisCluster">
+        <property name="poolConfig" ref="poolConfig"/>
+        <property name="propertySource">
+            <value>classpath:/property/redis.properties</value>
+        </property>
+        <property name="redisNodePrefix" value="redis.cluster"/>
     </bean>
 
-    <bean class="redis.clients.jedis.JedisShardInfo" id="shardInfo2">
-        <constructor-arg name="host" value="${redis.host}"/>
-        <constructor-arg name="port" value="${redis.port2}"/>
-    </bean>
 
-    <bean class="redis.clients.jedis.JedisShardInfo" id="shardInfo3">
-        <constructor-arg name="host" value="${redis.host}"/>
-        <constructor-arg name="port" value="${redis.port3}"/>
-    </bean>
-    <!--	定义分片对象    -->
-    <bean class="redis.clients.jedis.ShardedJedisPool" id="shardedJedisPool">
-        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
-        <constructor-arg name="shards">
-            <list>
-                <ref bean="shardInfo1"/>
-                <ref bean="shardInfo2"/>
-                <ref bean="shardInfo3"/>
-            </list>
-        </constructor-arg>
-    </bean>
 
-    <bean class="com.jt.common.service.RedisService" id="redisService"/>
+
 
 </beans>

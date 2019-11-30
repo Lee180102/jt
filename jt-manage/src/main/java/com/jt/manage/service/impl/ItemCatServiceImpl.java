@@ -9,6 +9,7 @@ import com.jt.manage.service.ItemCatService;
 import com.jt.manage.vo.EasyUITree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.JedisCluster;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ItemCatServiceImpl implements ItemCatService {
     private ItemCatMapper itemCatMapper;
 
     @Autowired
-    private RedisService redisService;
+    private JedisCluster jedisCluster;
     // private Jedis jedis;
 
 
@@ -50,14 +51,14 @@ public class ItemCatServiceImpl implements ItemCatService {
     public List<EasyUITree> findItemCatCache(Long parentId) {
 
         String key = "ITEM_CAT" + parentId;
-        String result = redisService.get(key);
+        String result = jedisCluster.get(key);
 
         List treeList = null;
         try {
             if (StringUtils.isEmpty(result)){
                treeList =  findItemCatList(parentId);
                 String treeListJson = objectMapper.writeValueAsString(treeList);
-                redisService.set(key,treeListJson);
+                jedisCluster.set(key,treeListJson);
                 System.out.println("查询数据库");
             }else {
                 treeList = objectMapper.readValue(result, List.class);
