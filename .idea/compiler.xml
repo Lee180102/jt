@@ -7,6 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jt-manage" />
+        <module name="jt-web" />
+        <module name="jt-sso" />
         <module name="jt-common" />
       </profile>
     </annotationProcessing>
@@ -14,6 +16,8 @@
       <module name="jt-common" target="1.8" />
       <module name="jt-manage" target="1.8" />
       <module name="jt-parent" target="1.8" />
+      <module name="jt-sso" target="1.8" />
+      <module name="jt-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

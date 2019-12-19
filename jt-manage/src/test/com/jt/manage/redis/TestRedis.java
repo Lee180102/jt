@@ -3,12 +3,8 @@ package com.jt.manage.redis;
 import com.alibaba.druid.util.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jt.manage.mapper.UserMapper;
 import com.jt.manage.pojo.User;
-import com.jt.manage.service.UserService;
-import com.jt.manage.service.impl.UserServiceImpl;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 
 import java.io.IOException;

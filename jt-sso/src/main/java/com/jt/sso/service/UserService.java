@@ -6,4 +6,6 @@ public interface UserService {
     boolean findCheckUser(String param, int type);
 
     void saveUser(User user);
+
+    String findUserByUsernameAndPassword(User user);
 }

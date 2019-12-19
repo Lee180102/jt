@@ -1,11 +1,16 @@
 package com.jt.sso.service.impl;
 
+import com.alibaba.druid.util.StringUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jt.common.factory.JedisClusterFactory;
 import com.jt.sso.mapper.UserMapper;
 import com.jt.sso.pojo.User;
 import com.jt.sso.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.JedisCluster;
 
 import java.util.Date;
 
@@ -14,6 +19,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+
+    @Autowired
+    private JedisCluster jedisCluster;
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
 
     @Override
     public boolean findCheckUser(String param, int type) {
@@ -40,5 +51,29 @@ public class UserServiceImpl implements UserService {
         user.setCreated(new Date());
         user.setUpdated(user.getCreated());
         userMapper.insert(user);
+    }
+
+    @Override
+    public String findUserByUsernameAndPassword(User user) {
+        user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+
+        User userDB = userMapper.findUserByUsernameAndPassword(user);
+        String returnToken = null;
+        if (userDB == null){
+            throw  new RuntimeException();
+        }
+
+        String token = "JT_TICKET_" + System.currentTimeMillis() + user.getUsername();
+
+        returnToken = DigestUtils.md5Hex(token);
+        try {
+            String userJSON = objectMapper.writeValueAsString(userDB);
+            jedisCluster.setex(returnToken,3600 * 24 * 7, userJSON);
+            System.out.println("单点登录成功");
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return returnToken;
     }
 }

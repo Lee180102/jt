@@ -41,4 +41,26 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+    @Override
+    public String findUserByUsernameAndPassword(User user) {
+        String token =null;
+        String url = "http://sso.jt.com/user/login";
+        HashMap<String, String> params = new HashMap<>();
+        params.put("username", user.getUsername());
+        params.put("password", user.getPassword());
+        try {
+            String resultJson = httpClient.doPost(url, params);
+            SysResult sysResult = OBJECT_MAPPER.readValue(resultJson, SysResult.class);
+            if (sysResult.getStatus() == 200){
+                token = (String) sysResult.getData();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+
+        return token;
+    }
 }
