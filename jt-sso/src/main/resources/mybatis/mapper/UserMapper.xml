@@ -7,6 +7,6 @@
 
     <select id="findCheckUser"  resultType="int">
         select count(*) tb_user from tb_user where ${column} = #{param}
-
+    </select>
 
 </mapper>
