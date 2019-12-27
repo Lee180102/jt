@@ -1,9 +1,9 @@
-package com.jt.sso.controller;
+package com.jt.cart.controller;
 
 import com.alibaba.druid.util.StringUtils;
 import com.jt.common.vo.SysResult;
-import com.jt.sso.pojo.User;
-import com.jt.sso.service.UserService;
+import com.jt.cart.pojo.User;
+import com.jt.cart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;

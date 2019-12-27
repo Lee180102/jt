@@ -1,12 +1,10 @@
-package com.jt.sso.service.impl;
+package com.jt.cart.service.impl;
 
-import com.alibaba.druid.util.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jt.common.factory.JedisClusterFactory;
-import com.jt.sso.mapper.UserMapper;
-import com.jt.sso.pojo.User;
-import com.jt.sso.service.UserService;
+import com.jt.cart.mapper.UserMapper;
+import com.jt.cart.pojo.User;
+import com.jt.cart.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

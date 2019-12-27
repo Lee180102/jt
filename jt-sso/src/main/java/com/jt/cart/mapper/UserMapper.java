@@ -1,8 +1,8 @@
-package com.jt.sso.mapper;
+package com.jt.cart.mapper;
 
 
 import com.jt.common.mapper.SysMapper;
-import com.jt.sso.pojo.User;
+import com.jt.cart.pojo.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

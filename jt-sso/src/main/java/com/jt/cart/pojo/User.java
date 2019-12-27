@@ -1,13 +1,11 @@
-package com.jt.sso.pojo;
+package com.jt.cart.pojo;
 
 import com.jt.common.po.BasePojo;
-import com.sun.scenario.effect.impl.prism.PrReflectionPeer;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.security.PrivateKey;
 
 @Table(name = "tb_user")
 public class User extends BasePojo {

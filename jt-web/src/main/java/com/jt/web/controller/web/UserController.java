@@ -1,4 +1,4 @@
-package com.jt.web.controller;
+package com.jt.web.controller.web;
 
 
 import com.alibaba.druid.util.StringUtils;
